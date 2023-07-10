@@ -8,18 +8,21 @@ body {
 
 .container{
     display: flex;
+    justify-content: space-between;
 }
 
 .contain{
     padding: 20px;
-    display: flex;
-    flex-wrap: wrap;
     overflow-y: auto;
     max-height: 1000px;
     justify-content: center;
     align-items: center;
     font-size: 30px;
     font-family: cursive;
+    width: 70%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
 }
 
 .artist-item {
@@ -54,10 +57,47 @@ body {
   
   .artist-item a:hover {
     transform: scale(1.1);
+    text-decoration: underline;
   }
 
 .filter{
     background-color: rgb(75, 73, 73);
     padding: 20px;
-    width: 25%;
+    width: 30%;
+    height: auto;
 }
+
+
+.filter h2 {
+  margin-bottom: 20px;
+}
+
+.filter form {
+  display: flex;
+  flex-direction: column;
+  color: rgb(215, 222, 226);
+  font-size: larger;
+}
+
+.creation-filter,
+.first-album,
+.members,
+.locations {
+  margin-bottom: 20px;
+}
+
+.creation-filter input[type="number"],
+.first-album input[type="number"] {
+  width: 150px;
+}
+
+.members input[type="range"] {
+  width: 100%;
+}
+
+.locations select {
+  width: 100%;
+}
+
+
+
