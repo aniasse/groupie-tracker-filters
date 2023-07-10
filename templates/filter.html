@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <title>Filter</title>
+</head>
+<body>
+    <div class="container">
+        <div class="filter">
+            <h2>Filter by</h2>
+            <form>
+                <div class="creation-filter">
+                <input type="checkbox" onchange="toggleFields()">
+                <label for="creation-debut">Creation Date</label>
+                <input type="number" name="datdebut" placeholder="From" disabled>
+               <input type="number" name="datfin" placeholder="To" disabled>
+            </div>
+            <div class="first-album">
+                <input type="checkbox" onchange="toggleFields()">
+                <label for="album-debut">First album</label>
+               <input type="number" name="debutalbum" placeholder="From" disabled>
+                <input type="number" name="finalalbum" placeholder="To" disabled>
+            </div>
+            <div class="members">
+                <input type="checkbox" onchange="toggleFields()">
+                <label for="members"><span id="valeurAffichee">7 </span> Members</label>
+                <input type="range" id="members" name="members" min="0" max="7" value="50" step="1" disabled><br>
+            </div>
+            <div class="locations">
+                <input type="checkbox" required>
+                <label for="location">Concert location</label>
+                <select name="location">
+                    <option value=""></option>
+                    {{range .Locations}}<option value="{{.}}"> {{.}}</option>{{end}}
+                    
+                </select>
+            </div>
+            <input type="submit" name="enter" value="Enter">
+            </form>
+        </div>
+        <div class="contain">
+              {{range .Artists}}
+            <div class="artist-item">
+            <a href="/artist-details?Id={{.Aid}}">
+                <img class="circle-image" src="{{.AImg}}" alt="">
+                <h3>{{.Aname}}</h3>
+            </a> 
+        </div>
+        {{end}}
+    </div>
+</body>
+<script>
+    function toggleFields() {
+      var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+      var fields = document.querySelectorAll('input[type="text"], input[type="number"], select');
+  
+      for (var i = 0; i < checkboxes.length; i++) {
+        var checkbox = checkboxes[i];
+        var field = fields[i];
+  
+        field.disabled = !checkbox.checked;
+      }
+    }
+  </script>
+<script>
+    var valeurInput = document.getElementById("members");
+    var valeurAffichee = document.getElementById("valeurAffichee");
+
+    valeurInput.addEventListener("input", function(){
+        valeurAffichee.textContent = valeurInput.value;
+    });
+</script>
+</html>
