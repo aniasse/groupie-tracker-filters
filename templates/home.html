@@ -8,8 +8,8 @@
     <link rel="icon" href="/static/images/icon.jpeg">
 </head>
 <body>
-    <div style="display: flex;">
-        <div style="width: 65%;">
+    <!-- <div style="display: flex;"> -->
+        <!-- <div style="width: 65%;"> -->
             <header>
                 <h1>Welcome to Groupie-Tracker</h1>
             </header>
@@ -21,18 +21,12 @@
                         <li><a href="/locations">Locations</a></li>
                         <li><a href="/dates">Dates</a></li>
                     </div>
-                        <a href=""><img src="/static/images/filtre.jpg" alt="" style="width: 35px; height: 35px; float: right;"></a></li>
+                        <a href="#filter"><img src="/static/images/filtre.jpg" alt="" style="width: 35px; height: 35px; float: right;" class="filter-icon" onclick="toggleDiv()" ></a></li>
                 </ul>
             </nav>
-            <div class="content">
-                <p>Discover your favorite artists with Groupie Trackers: <br>Passion just a click away!</p>
-                <img src="/static/images/pic.png" class="image">
-            </div>
-        </div>
-        <div style="width: 35%; margin-left: 20px;">
-            <div class="container">
-                <div class="filter">
-                    <h2>Filter by</h2>
+            <div class="filtre">
+                <div id="filter">
+                        <h2>Filter by</h2>
                     <form>
                         <div class="creation-filter">
                             <input type="checkbox" name="creation-debut" onchange="toggleFields()">
@@ -62,6 +56,15 @@
                         <input type="submit" name="enter" value="Enter">
                     </form>
                 </div>
+            </div>
+            <div class="content">
+                <p>Discover your favorite artists with Groupie Trackers: <br>Passion just a click away!</p>
+                <img src="/static/images/pic.png" class="image">
+            </div>
+        <!-- </div> -->
+        <!-- <div style="width: 35%; margin-left: 20px;"> -->
+            <div class="container">
+               
                 <div class="contain">
                       {{range .Artists}}
                     <div class="artist-item">
@@ -72,7 +75,7 @@
                 </div>
                 {{end}}
             </div>
-    </div> 
+    <!-- </div>  -->
 </body>
 <script>
     function toggleFields() {
@@ -113,5 +116,17 @@
     valeurInput.addEventListener("input", function(){
         valeurAffichee.textContent = valeurInput.value;
     });
+
+
+    // basculer vers filter
+
+function toggleDiv() {
+  var div = document.getElementById("filter");
+  if (div.style.display === "none") {
+    div.style.display = "block"; // Afficher l'élément
+  } else {
+    div.style.display = "none"; // Masquer l'élément
+  }
+}
 </script>
 </html>

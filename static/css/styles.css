@@ -1,0 +1,114 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 10px;
+    background-color: black;
+    color:rgb(230, 72, 9) ;
+}
+
+.container{
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.contain{
+    padding: 20px;
+    overflow-y: auto;
+    max-height: 1000px;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    font-family: cursive;
+    width: 70%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+}
+
+.artist-item {
+    width: 350px;
+    margin: 20px;
+    text-align: center;
+}
+
+ .cicle-image {
+    border: #efe7e7;
+    border-width: 2px;
+ }
+  .artist-item a {
+    display: block;
+    text-decoration: none;
+    color: rgb(230, 72, 9);
+    transition: all 0.3s ease;
+  }
+  
+  .artist-item img {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    border: 2px solid #f2f2f2;
+  }
+  
+  .artist-item h3 {
+    margin: 0;
+  }
+  
+  .artist-item a:hover {
+    transform: scale(1.1);
+    text-decoration: underline;
+  }
+
+/* style pour le filter*/
+
+.filtre{
+  float: right;
+  background-color: rgb(75, 73, 73);
+  padding: 20px;
+  width: 30%;
+  height: auto;
+}
+  #filter {
+    display: none; /* Masquer l'élément par défaut */
+  }
+  
+  #filter:target {
+    display: block; /* Afficher l'élément lorsque ciblé */
+  }
+
+
+.filter h2 {
+  margin-bottom: 20px;
+}
+
+.filter form {
+  display: flex;
+  flex-direction: column;
+  color: rgb(215, 222, 226);
+  font-size: larger;
+}
+
+.creation-filter,
+.first-album,
+.members,
+.locations {
+  margin-bottom: 20px;
+}
+
+.creation-filter input[type="number"],
+.first-album input[type="number"] {
+  width: 150px;
+}
+
+.members input[type="range"] {
+  width: 100%;
+}
+
+.locations select {
+  width: 100%;
+}
+
+
+
