@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Groupie-Tracker</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="icon" href="/static/images/icon.jpeg">
+</head>
+<body>
+    <div style="display: flex;">
+        <div style="width: 65%;">
+            <header>
+                <h1>Welcome to Groupie-Tracker</h1>
+            </header>
+            <nav>
+                <ul>
+                    <div>
+
+                        <li><a href="/artists">Artists</a></li>
+                        <li><a href="/locations">Locations</a></li>
+                        <li><a href="/dates">Dates</a></li>
+                    </div>
+                        <a href=""><img src="/static/images/filtre.jpg" alt="" style="width: 35px; height: 35px; float: right;"></a></li>
+                </ul>
+            </nav>
+            <div class="content">
+                <p>Discover your favorite artists with Groupie Trackers: <br>Passion just a click away!</p>
+                <img src="/static/images/pic.png" class="image">
+            </div>
+        </div>
+        <div style="width: 35%; margin-left: 20px;">
+            <div class="container">
+                <div class="filter">
+                    <h2>Filter by</h2>
+                    <form>
+                        <div class="creation-filter">
+                            <input type="checkbox" name="creation-debut" onchange="toggleFields()">
+                            <label for="creation-debut">Creation Date</label>
+                            <input type="number" name="datdebut" placeholder="From" min="" max="" disabled>
+                            <input type="number" name="datfin" placeholder="To" min="" max="" disabled>
+                        </div>
+                        <div class="first-album">
+                            <input type="checkbox" name="album-debut" onchange="toggleFields()">
+                            <label for="album-debut">First album</label>
+                            <input type="number" name="debutalbum" placeholder="From" min="" max="" disabled>
+                            <input type="number" name="finalalbum" placeholder="To" min="" max="" disabled>
+                        </div>
+                        <div class="members">
+                            <input type="checkbox" name="members" onchange="toggleFields()">
+                            <label for="members"><span id="valeurAffichee">7 </span> Members</label>
+                            <input type="range" id="members" name="members" min="1" max="7" value="50" step="1" disabled><br>
+                        </div>
+                        <div class="locations">
+                            <input type="checkbox" name="location" onchange="toggleFields()">
+                            <label for="location">Concert location</label>
+                            <select name="location" disabled>
+                            <option value=""></option>
+                            {{range .Locations}}<option value="{{.}}"> {{.}}</option>{{end}}
+                            </select>
+                        </div>
+                        <input type="submit" name="enter" value="Enter">
+                    </form>
+                </div>
+                <div class="contain">
+                      {{range .Artists}}
+                    <div class="artist-item">
+                    <a href="/artist-details?Id={{.Aid}}">
+                        <img class="circle-image" src="{{.AImg}}" alt="">
+                        <h3>{{.Aname}}</h3>
+                    </a> 
+                </div>
+                {{end}}
+            </div>
+    </div> 
+</body>
+<script>
+    function toggleFields() {
+  var creationCheckbox = document.querySelector('input[name="creation-debut"]');
+  var creationFields = document.querySelectorAll('input[name="datdebut"], input[name="datfin"]');
+
+  var albumCheckbox = document.querySelector('input[name="album-debut"]');
+  var albumFields = document.querySelectorAll('input[name="debutalbum"], input[name="finalalbum"]');
+
+  var membersCheckbox = document.querySelector('input[name="members"]');
+  var membersField = document.querySelector('input[id="members"]');
+
+  var locationCheckbox = document.querySelector('input[name="location"]');
+  var locationField = document.querySelector('select[name="location"]');
+
+
+  // Basculer les champs pour creation date
+  for (var i = 0; i < creationFields.length; i++) {
+    var field = creationFields[i];
+    field.disabled = !creationCheckbox.checked;
+  }
+
+  // Basculer les champs pour first album
+  for (var i = 0; i < albumFields.length; i++) {
+    var field = albumFields[i];
+    field.disabled = !albumCheckbox.checked;
+  }
+
+  // Basculer les champs pour members
+  membersField.disabled = !membersCheckbox.checked;
+
+    // Basculer les champs pour concert location
+  locationField.disabled = !locationCheckbox.checked;
+}
+    var valeurInput = document.getElementById("members");
+    var valeurAffichee = document.getElementById("valeurAffichee");
+
+    valeurInput.addEventListener("input", function(){
+        valeurAffichee.textContent = valeurInput.value;
+    });
+</script>
+</html>

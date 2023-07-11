@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/location.css">
+    <title>Date</title>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="/artists">Artists</a></li>
+            <li><a href="/locations">Locations</a></li>
+            <li><a href="/dates">Dates</a></li>
+        </ul>
+    </nav>
+    <div class="title">
+        <h1>DATES</h1>
+    </div> 
+    <div class="date-list">
+        {{range $key, $val := .Date}}
+            <label for="select-{{$key}}">{{$key}}</label>
+            <select class="select-option" id="select-{{$key}}">
+                <option value="">please choose a date</option>
+                {{range $val}} <option value="/date-infos?Dat={{.}}"> {{.}} </option> {{end}}
+            </select>
+        {{end}}
+    </div>
+
+    <script>
+        var selectOptions = document.querySelectorAll('.select-option');
+        selectOptions.forEach(function(select) {
+            select.onchange = function() {
+                var selectedOption = select.options[select.selectedIndex];
+                var url = selectedOption.value;
+
+                window.location.href=url;
+            };
+        });
+    </script>
+</body>
+</html>
