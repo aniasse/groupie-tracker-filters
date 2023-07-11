@@ -8,74 +8,65 @@
     <link rel="icon" href="/static/images/icon.jpeg">
 </head>
 <body>
-    <!-- <div style="display: flex;"> -->
-        <!-- <div style="width: 65%;"> -->
-            <header>
-                <h1>Welcome to Groupie-Tracker</h1>
-            </header>
-            <nav>
-                <ul>
-                    <div>
+    <header>
+        <h1>Welcome to Groupie-Tracker</h1>
+    </header>
+    <nav>
+        <ul>
+            <div>
 
-                        <li><a href="/artists">Artists</a></li>
-                        <li><a href="/locations">Locations</a></li>
-                        <li><a href="/dates">Dates</a></li>
-                    </div>
-                        <a href="#filter"><img src="/static/images/filtre.jpg" alt="" style="width: 35px; height: 35px; float: right;" class="filter-icon" onclick="toggleDiv()" ></a></li>
-                </ul>
-            </nav>
-            <div class="filtre">
-                <div id="filter">
-                        <h2>Filter by</h2>
-                    <form>
-                        <div class="creation-filter">
-                            <input type="checkbox" name="creation-debut" onchange="toggleFields()">
-                            <label for="creation-debut">Creation Date</label>
-                            <input type="number" name="datdebut" placeholder="From" min="" max="" disabled>
-                            <input type="number" name="datfin" placeholder="To" min="" max="" disabled>
-                        </div>
-                        <div class="first-album">
-                            <input type="checkbox" name="album-debut" onchange="toggleFields()">
-                            <label for="album-debut">First album</label>
-                            <input type="number" name="debutalbum" placeholder="From" min="" max="" disabled>
-                            <input type="number" name="finalalbum" placeholder="To" min="" max="" disabled>
-                        </div>
-                        <div class="members">
-                            <input type="checkbox" name="members" onchange="toggleFields()">
-                            <label for="members"><span id="valeurAffichee">7 </span> Members</label>
-                            <input type="range" id="members" name="members" min="1" max="7" value="50" step="1" disabled><br>
-                        </div>
-                        <div class="locations">
-                            <input type="checkbox" name="location" onchange="toggleFields()">
-                            <label for="location">Concert location</label>
-                            <select name="location" disabled>
-                            <option value=""></option>
-                            {{range .Locations}}<option value="{{.}}"> {{.}}</option>{{end}}
-                            </select>
-                        </div>
-                        <input type="submit" name="enter" value="Enter">
-                    </form>
-                </div>
+                <li><a href="/artists">Artists</a></li>
+                <li><a href="/locations">Locations</a></li>
+                <li><a href="/dates">Dates</a></li>
             </div>
-            <div class="content">
-                <p>Discover your favorite artists with Groupie Trackers: <br>Passion just a click away!</p>
-                <img src="/static/images/pic.png" class="image">
+                <img src="/static/images/filtre.jpg" alt=""  class="filter-icon" onclick="toggleDiv()" >
+        </ul>
+    </nav>
+    <div id="filter">
+            <h2>Filter by</h2>
+        <form>
+            <div class="creation-filter">
+                <input type="checkbox" name="creation-debut" onchange="toggleFields()">
+                <label for="creation-debut">Creation Date</label>
+                <input type="number" name="datdebut" placeholder="From" min="" max="" disabled>
+                <input type="number" name="datfin" placeholder="To" min="" max="" disabled>
             </div>
-        <!-- </div> -->
-        <!-- <div style="width: 35%; margin-left: 20px;"> -->
-            <div class="container">
-               
-                <div class="contain">
-                      {{range .Artists}}
-                    <div class="artist-item">
-                    <a href="/artist-details?Id={{.Aid}}">
-                        <img class="circle-image" src="{{.AImg}}" alt="">
-                        <h3>{{.Aname}}</h3>
-                    </a> 
-                </div>
-                {{end}}
+            <div class="first-album">
+                <input type="checkbox" name="album-debut" onchange="toggleFields()">
+                <label for="album-debut">First album</label>
+                <input type="number" name="debutalbum" placeholder="From" min="" max="" disabled>
+                <input type="number" name="finalalbum" placeholder="To" min="" max="" disabled>
             </div>
-    <!-- </div>  -->
+            <div class="members">
+                <input type="checkbox" name="members" onchange="toggleFields()">
+                <label for="members"><span id="valeurAffichee">7 </span> Members</label>
+                <input type="range" id="members" name="members" min="1" max="7" value="50" step="1" disabled><br>
+            </div>
+            <div class="locations">
+                <input type="checkbox" name="location" onchange="toggleFields()">
+                <label for="location">Concert location</label>
+                <select name="location" disabled>
+                <option value=""></option>
+                {{range .Locations}}<option value="{{.}}"> {{.}}</option>{{end}}
+                </select>
+            </div>
+            <input type="submit" name="enter" value="Filter" class="filter-btn">
+        </form>
+    </div>
+    <div class="content">
+        <p>Discover your favorite artists with Groupie Trackers: <br>Passion just a click away!</p>
+        <img src="/static/images/pic.png" class="image">
+    </div>
+    <div class="container"><div class="contain">
+                {{range .Artists}}
+            <div class="artist-item">
+            <a href="/artist-details?Id={{.Aid}}">
+                <img class="circle-image" src="{{.AImg}}" alt="">
+                <h3>{{.Aname}}</h3>
+            </a> 
+        </div>
+        {{end}}
+    </div>
 </body>
 <script>
     function toggleFields() {
@@ -122,10 +113,10 @@
 
 function toggleDiv() {
   var div = document.getElementById("filter");
-  if (div.style.display === "none") {
-    div.style.display = "block"; // Afficher l'élément
+  if (div.style.display === "block") {
+    div.style.display = "none"; // Afficher l'élément
   } else {
-    div.style.display = "none"; // Masquer l'élément
+    div.style.display = "block"; // Masquer l'élément
   }
 }
 </script>

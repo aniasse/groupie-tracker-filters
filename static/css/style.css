@@ -55,9 +55,18 @@ nav ul li a:hover {
     color: white;
     border-radius: 12px;
 }
+.filter-icon{
+    margin-right: 20px;
+    width: 40px; 
+    height: 40px; 
+    float: right;
+    cursor: pointer;
+    border-radius: 50%;
+}
 
 /* Styles pour le contenu principal */
 .content {
+    /* position: absolute; */
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -93,9 +102,60 @@ nav ul li a:hover {
     }
 
     .content img {
-        flex: 0 0 30%;
+        flex: 0 0 10%;
         margin-left: 20px;
     }
 }
 
-/*Location
+
+
+#filter {
+    display: none; /* Masquer l'élément par défaut */
+    float: right;
+    background-color: rgb(75, 73, 73);
+    padding: 20px;
+    width: 30%;
+    height: auto;
+    border-radius: 20px;
+    margin-right: 20px;
+    position: absolute;
+    right: 0px;
+}
+  
+#filter:target {
+  display: block; /* Afficher l'élément lorsque ciblé */
+  
+}
+
+
+.filter:target h2 {
+margin-bottom: 20px;
+padding: 10px;
+}
+
+.filter form {
+display: flex;
+flex-direction: column;
+color: rgb(215, 222, 226);
+font-size: larger;
+}
+
+.creation-filter,
+.first-album,
+.members,
+.locations {
+margin-bottom: 20px;
+}
+
+.creation-filter input[type="number"],
+.first-album input[type="number"] {
+width: 150px;
+}
+
+.members input[type="range"] {
+width: 100%;
+}
+
+.locations select {
+width: 75%;
+}
