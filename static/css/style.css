@@ -88,26 +88,7 @@ nav ul li a:hover {
     margin-top: 20%;
 }
 
-/* Media queries pour la réactivité */
-@media screen and (min-width: 768px) {
-    .content {
-        margin-top: 100px;
-        flex-wrap: nowrap;
-        justify-content: space-between;
-    }
-
-    .content p {
-        flex: 0 0 60%;
-        margin-right: 20px;
-    }
-
-    .content img {
-        flex: 0 0 10%;
-        margin-left: 20px;
-    }
-}
-
-
+/*Style pour le filter*/
 
 #filter {
     display: none; /* Masquer l'élément par défaut */
@@ -128,16 +109,17 @@ nav ul li a:hover {
 }
 
 
-.filter:target h2 {
+
+#filter h2 {
 margin-bottom: 20px;
-padding: 10px;
 }
 
-.filter form {
+#filter form {
 display: flex;
 flex-direction: column;
 color: rgb(215, 222, 226);
 font-size: larger;
+/* align-items: center; */
 }
 
 .creation-filter,
@@ -150,6 +132,7 @@ margin-bottom: 20px;
 .creation-filter input[type="number"],
 .first-album input[type="number"] {
 width: 150px;
+height: 25px;
 }
 
 .members input[type="range"] {
@@ -158,4 +141,62 @@ width: 100%;
 
 .locations select {
 width: 75%;
+}
+
+.filter-btn{
+    width: 100px;
+    font-size: larger;
+    margin-left: 40%;
+}
+
+/* Media queries pour la réactivité */
+
+@media (max-width: 1000px) {
+    .content {
+        margin-top: 100px;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+    }
+
+    .content p {
+        flex: 0 0 60%;
+        margin-right: 20px;
+    }
+
+    .content img {
+        flex: 0 0 10%;
+        margin-left: 20px;
+    }
+    #filter{
+        position: relative;
+   }
+   .creation-filter,
+    .first-album,
+    .members,
+    .locations {
+        margin-bottom: 20px;
+    }
+
+    .creation-filter input[type="number"],
+    .first-album input[type="number"] {
+        width: 75px;
+        height: 25px;
+    }
+
+    .members input[type="range"] {
+        width: 100%;
+    }
+
+    .locations select {
+        width: 75%;
+    }
+    #filter{
+        position: absolute;
+        right: 0px;
+    }
+    .filter-btn{
+        width: 80px;
+        font-size: larger;
+        margin-left: 5%;
+    }
 }

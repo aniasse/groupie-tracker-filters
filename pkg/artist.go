@@ -122,7 +122,7 @@ func HandleArtistDeatail(w http.ResponseWriter, r *http.Request) {
 			ListArtists: MyArtist,
 		}
 
-		temp := template.Must(template.ParseFiles("templates/filter.html"))
+		temp := template.Must(template.ParseFiles("templates/artist_detail.html"))
 		temp.Execute(w, NewArtist)
 	}
 }

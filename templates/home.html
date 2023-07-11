@@ -26,26 +26,26 @@
             <h2>Filter by</h2>
         <form>
             <div class="creation-filter">
-                <input type="checkbox" name="creation-debut" onchange="toggleFields()">
-                <label for="creation-debut">Creation Date</label>
-                <input type="number" name="datdebut" placeholder="From" min="" max="" disabled>
-                <input type="number" name="datfin" placeholder="To" min="" max="" disabled>
+                <input type="checkbox" name="creationdate" onchange="toggleFields()">
+                <label for="creationdate">Creation Date</label>
+                <input type="number" name="datdebut" placeholder="From" min="1962" max="2015" disabled>
+                <input type="number" name="datfin" placeholder="To" min="1962" max="" disabled required>
             </div>
             <div class="first-album">
-                <input type="checkbox" name="album-debut" onchange="toggleFields()">
-                <label for="album-debut">First album</label>
+                <input type="checkbox" name="firstalbum" onchange="toggleFields()">
+                <label for="firstalbum">First album</label>
                 <input type="number" name="debutalbum" placeholder="From" min="" max="" disabled>
-                <input type="number" name="finalalbum" placeholder="To" min="" max="" disabled>
+                <input type="number" name="finalalbum" placeholder="To" min="" max="" disabled required>
             </div>
             <div class="members">
                 <input type="checkbox" name="members" onchange="toggleFields()">
                 <label for="members"><span id="valeurAffichee">7 </span> Members</label>
-                <input type="range" id="members" name="members" min="1" max="7" value="50" step="1" disabled><br>
+                <input type="range" id="members" name="member" min="1" max="7" value="50" step="1" disabled><br>
             </div>
             <div class="locations">
                 <input type="checkbox" name="location" onchange="toggleFields()">
                 <label for="location">Concert location</label>
-                <select name="location" disabled>
+                <select name="loc" disabled>
                 <option value=""></option>
                 {{range .Locations}}<option value="{{.}}"> {{.}}</option>{{end}}
                 </select>
@@ -70,17 +70,17 @@
 </body>
 <script>
     function toggleFields() {
-  var creationCheckbox = document.querySelector('input[name="creation-debut"]');
+  var creationCheckbox = document.querySelector('input[name="creationdate"]');
   var creationFields = document.querySelectorAll('input[name="datdebut"], input[name="datfin"]');
 
-  var albumCheckbox = document.querySelector('input[name="album-debut"]');
+  var albumCheckbox = document.querySelector('input[name="firstalbum"]');
   var albumFields = document.querySelectorAll('input[name="debutalbum"], input[name="finalalbum"]');
 
   var membersCheckbox = document.querySelector('input[name="members"]');
   var membersField = document.querySelector('input[id="members"]');
 
   var locationCheckbox = document.querySelector('input[name="location"]');
-  var locationField = document.querySelector('select[name="location"]');
+  var locationField = document.querySelector('select[name="loc"]');
 
 
   // Basculer les champs pour creation date
