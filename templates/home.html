@@ -41,8 +41,8 @@
                 <input type="checkbox" name="members" onchange="toggleFields()">
                 <label for="members"><span id="valeurAffichee1">8 </span> Members</label>
                 <input type="range" id="member1" name="member" min="1" max="8" value="50" step="1" disabled>
-                <label for="members"><span id="valeurAffichee2">8 </span> Members</label>
-                <input type="range" id="member2" name="member" min="1" max="8" value="50" step="1" disabled>  
+                <!-- <label for="members"><span id="valeurAffichee2">8 </span> Members</label>
+                <input type="range" id="member2" name="member" min="1" max="8" value="50" step="1" disabled>   -->
             </div>
             <div class="locations">
                 <input type="checkbox" name="location" onchange="toggleFields()">
@@ -78,7 +78,7 @@
   var albumFields = document.querySelectorAll('input[name="debutalbum"], input[name="finalalbum"]');
 
   var membersCheckbox = document.querySelector('input[name="members"]');
-  var membersField = document.querySelectorAll('input[id="member1"], input[id="member2"]');
+  var membersField = document.querySelector('input[id="member1"]');
 
   var locationCheckbox = document.querySelector('input[name="location"]');
   var locationField = document.querySelector('select[name="loc"]');
@@ -100,10 +100,10 @@
   locationField.disabled = !locationCheckbox.checked;
 
   // Basculer les champs pour members
-  for (var i = 0; i < membersField.length; i++) {
-    var field = membersField[i];
-    field.disabled = !membersCheckbox.checked;
-  }
+//   for (var i = 0; i < membersField.length; i++) {
+//     var field = membersField[i];
+//     field.disabled = !membersCheckbox.checked;
+//   }
    membersField.disabled = !membersCheckbox.checked;
 
 }
@@ -114,11 +114,11 @@
         valeurAffichee1.textContent = valeurInput1.value;
     });
 
-    var valeurInput2 = document.getElementById("member2");
-    var valeurAffichee2 = document.getElementById("valeurAffichee2");
-    valeurInput2.addEventListener("input", function(){
-        valeurAffichee2.textContent = valeurInput2.value;
-    });
+    // var valeurInput2 = document.getElementById("member2");
+    // var valeurAffichee2 = document.getElementById("valeurAffichee2");
+    // valeurInput2.addEventListener("input", function(){
+    //     valeurAffichee2.textContent = valeurInput2.value;
+    // });
 
 
     // basculer vers filter
