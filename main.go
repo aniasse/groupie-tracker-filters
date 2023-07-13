@@ -19,6 +19,8 @@ func main() {
 			pkg.HandleArtist(w, r)
 		case "/artist-details":
 			pkg.HandleArtistDeatail(w, r)
+		case "/filter":
+			pkg.HandleFilterDetail(w, r)
 		case "/locations":
 			pkg.HandleLocation(w, r)
 		case "/location-detail":

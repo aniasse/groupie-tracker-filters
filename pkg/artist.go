@@ -65,11 +65,29 @@ func HandleArtist(w http.ResponseWriter, r *http.Request) {
 
 	Art := GetArtistData()
 
+	Loc := []string{}
+	for _, v := range GetLocationData().Loc {
+		Loc = append(Loc, v.Loca...)
+	}
+	for i := 0; i < len(Loc); i++ {
+		for j := i + 1; j < len(Loc); j++ {
+			if Loc[i] > Loc[j] {
+				swap := Loc[i]
+				Loc[i] = Loc[j]
+				Loc[j] = swap
+			}
+		}
+	}
+	NewFilter := Filter{
+		Artists:   Art,
+		Locations: Loc,
+	}
 	temp := template.Must(template.ParseFiles("templates/artist.html"))
-	err := temp.Execute(w, Art)
+	err := temp.Execute(w, NewFilter)
 	if err != nil {
 		fmt.Println("Erreur lors de l'execution du template", err)
 	}
+
 }
 
 func HandleArtistDeatail(w http.ResponseWriter, r *http.Request) {

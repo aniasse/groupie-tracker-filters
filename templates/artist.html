@@ -4,23 +4,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/css/location.css">
+    <link rel="stylesheet" href="/static/css/style.css">
     <link rel="icon" href="/static/images/icon.jpeg">
     <title>Artists</title>
 </head>
 <body>
     <nav>
         <ul>
-            <li><a href="/artists">Artists</a></li>
-            <li><a href="/locations">Locations</a></li>
-            <li><a href="/dates">Dates</a></li>
+            <div>
+
+                <li><a href="/artists">Artists</a></li>
+                <li><a href="/locations">Locations</a></li>
+                <li><a href="/dates">Dates</a></li>
+            </div>
+                <img src="/static/images/filtre.jpg" alt=""  class="filter-icon" onclick="toggleDiv()" >
         </ul>
     </nav>
+    <div id="filter">
+            <h2>Filter by</h2>
+        <form action="/filter">
+            <div class="creation-filter">
+                <input type="checkbox" name="creationdate" onchange="toggleFields()">
+                <label for="creationdate">Creation Date</label>
+                <input type="number" name="datdebut" placeholder="From" min="1962" max="2015" value="1962" disabled>
+                <input type="number" name="datfin" placeholder="To" min="1962" max="2015" value="2015" disabled required>
+            </div>
+            <div class="first-album">
+                <input type="checkbox" name="firstalbum" onchange="toggleFields()">
+                <label for="firstalbum">First album</label>
+                <input type="date" name="debutalbum"  min="1963-07-31" max="2018-11-15" value="1963-07-31"  disabled>
+                <input type="date" name="finalalbum" min="1963-07-31"  max="2018-11-15" value="2018-11-15" disabled required>
+            </div>
+            <div class="members">
+                <input type="checkbox" name="members" onchange="toggleFields()">
+                <label for="members"><span id="valeurAffichee">7 </span> Members</label>
+                <input type="range" id="members" name="member" min="1" max="7" value="50" step="1" disabled><br>
+            </div>
+            <div class="locations">
+                <input type="checkbox" name="location" onchange="toggleFields()">
+                <label for="location">Concert location</label>
+                <select name="loc" disabled>
+                {{range .Locations}}<option value="{{.}}"> {{.}}</option>{{end}}
+                </select>
+            </div>
+            <input type="submit" name="enter" value="Filter" class="filter-btn">
+        </form>
+    </div>
     <div class="title">
             <h1>ARTISTS</h1>
         </div> 
     <div class="container">
         
-        {{range .}}
+        {{range .Artists}}
         <div class="artist-item">
            <a href="/artist-details?Id={{.Aid}}">
                <img class="circle-image" src="{{.AImg}}" alt="">
@@ -30,4 +65,56 @@
         {{end}}
     </div>
 </body>
+<script>
+    function toggleFields() {
+        var creationCheckbox = document.querySelector('input[name="creationdate"]');
+        var creationFields = document.querySelectorAll('input[name="datdebut"], input[name="datfin"]');
+
+        var albumCheckbox = document.querySelector('input[name="firstalbum"]');
+        var albumFields = document.querySelectorAll('input[name="debutalbum"], input[name="finalalbum"]');
+
+        var membersCheckbox = document.querySelector('input[name="members"]');
+        var membersField = document.querySelector('input[id="members"]');
+
+        var locationCheckbox = document.querySelector('input[name="location"]');
+        var locationField = document.querySelector('select[name="loc"]');
+
+
+        // Basculer les champs pour creation date
+        for (var i = 0; i < creationFields.length; i++) {
+                var field = creationFields[i];
+                field.disabled = !creationCheckbox.checked;
+        }
+
+        // Basculer les champs pour first album
+        for (var i = 0; i < albumFields.length; i++) {
+                var field = albumFields[i];
+                field.disabled = !albumCheckbox.checked;
+        }
+
+        // Basculer les champs pour members
+        membersField.disabled = !membersCheckbox.checked;
+
+            // Basculer les champs pour concert location
+        locationField.disabled = !locationCheckbox.checked;
+    }
+    var valeurInput = document.getElementById("members");
+    var valeurAffichee = document.getElementById("valeurAffichee");
+
+    valeurInput.addEventListener("input", function(){
+        valeurAffichee.textContent = valeurInput.value;
+    });
+
+
+    // basculer vers filter
+
+    function toggleDiv() {
+        var div = document.getElementById("filter");
+        if (div.style.display === "block") {
+            div.style.display = "none"; // Afficher l'élément
+        } else {
+            div.style.display = "block"; // Masquer l'élément
+        }
+    }
+</script>
 </html>
