@@ -35,8 +35,8 @@ func main() {
 
 	})))
 
-	fmt.Println("The program is running on http://localhost:4040")
-	http.ListenAndServe("localhost:4040", nil)
+	fmt.Println("The program is running on http://localhost:8080")
+	http.ListenAndServe("localhost:8080", nil)
 
 }
 
