@@ -64,6 +64,16 @@ func error400Handler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func error405Handler(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusMethodNotAllowed)
+	tmpl := template.Must(template.ParseFiles("templates/error405.html"))
+	err := tmpl.Execute(w, nil)
+	if err != nil {
+		handleError(w, r, http.StatusMethodNotAllowed)
+		return
+	}
+}
+
 // handleError handles HTTP errors and redirects to the appropriate error handlers.
 func handleError(w http.ResponseWriter, r *http.Request, statusCode int) {
 	switch statusCode {
@@ -84,6 +94,8 @@ func handleError(w http.ResponseWriter, r *http.Request, statusCode int) {
 		}
 	case http.StatusBadRequest:
 		error400Handler(w, r)
+	case http.StatusMethodNotAllowed:
+		error405Handler(w, r)
 	default:
 		// Handles the unexpected errors
 		error500Handler(w, r)

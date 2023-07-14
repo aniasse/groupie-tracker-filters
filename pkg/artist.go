@@ -82,7 +82,7 @@ func HandleArtist(w http.ResponseWriter, r *http.Request) {
 		Artists:   Art,
 		LocatFilt: Loc,
 	}
-	temp := template.Must(template.ParseFiles("templates/artist.html"))
+	temp := template.Must(template.ParseFiles("templates/artist.html", "templates/form.html", "templates/navbar.html"))
 	err := temp.Execute(w, NewFilter)
 	if err != nil {
 		fmt.Println("Erreur lors de l'execution du template", err)
@@ -140,7 +140,7 @@ func HandleArtistDeatail(w http.ResponseWriter, r *http.Request) {
 			ListArtists: MyArtist,
 		}
 
-		temp := template.Must(template.ParseFiles("templates/artist_detail.html"))
+		temp := template.Must(template.ParseFiles("templates/artist_detail.html", "templates/navbar.html"))
 		temp.Execute(w, NewArtist)
 	}
 }

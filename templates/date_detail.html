@@ -4,18 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/css/location.css">
+    <link rel="stylesheet" href="/static/css/style.css">
     <link rel="icon" href="/static/images/icon.jpeg">
     <title>Date Infos</title>
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/artists">Artists</a></li>
-            <li><a href="/locations">Locations</a></li>
-            <li><a href="/dates">Dates</a></li>
-        </ul>
-    </nav>
+    {{define "ExtraItem"}} {{end}}
+    {{template "navbar"}}
     <div class="date-detail">
         <h2>Date: {{.Even}}</h2>
         <div class="date-info">

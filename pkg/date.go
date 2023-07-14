@@ -100,7 +100,7 @@ func HandleDAte(w http.ResponseWriter, r *http.Request) {
 		data: uniq_date,
 	}
 
-	err := template.Must(template.ParseFiles("templates/date.html")).Execute(w, NewDatEvent)
+	err := template.Must(template.ParseFiles("templates/date.html", "templates/navbar.html")).Execute(w, NewDatEvent)
 	if err != nil {
 		fmt.Println("Erreur lors de l'execution du template", err)
 	}
@@ -156,7 +156,7 @@ func HandleDateInfo(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	erreur := template.Must(template.ParseFiles("templates/date_detail.html")).Execute(w, NewDateInfo)
+	erreur := template.Must(template.ParseFiles("templates/date_detail.html", "templates/navbar.html")).Execute(w, NewDateInfo)
 	if erreur != nil {
 		fmt.Println("Erreur lors de l'execution du template", erreur)
 	}

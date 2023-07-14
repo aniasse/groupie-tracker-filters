@@ -80,7 +80,7 @@ func HandleLocation(w http.ResponseWriter, r *http.Request) {
 		Local: tabloc,
 	}
 
-	temp := template.Must(template.ParseFiles("templates/location.html"))
+	temp := template.Must(template.ParseFiles("templates/location.html", "templates/navbar.html"))
 	err := temp.Execute(w, NewLocalisation)
 	if err != nil {
 		fmt.Println("Erreur lors de l'execution du template", err)
@@ -150,7 +150,7 @@ func HandleLocationDetail(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	temp := template.Must(template.ParseFiles("templates/location_detail.html"))
+	temp := template.Must(template.ParseFiles("templates/location_detail.html", "templates/navbar.html"))
 	err := temp.Execute(w, NewLocationInfo)
 	if err != nil {
 		fmt.Println("Erreur lors de l'execution du template", err)
