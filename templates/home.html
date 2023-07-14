@@ -6,6 +6,7 @@
     <title>Groupie-Tracker</title>
     <link rel="stylesheet" href="/static/css/style.css">
     <link rel="icon" href="/static/images/icon.jpeg">
+    <script src="/static/script/form.js" defer></script>
 </head>
 <body>
     <header>
@@ -14,7 +15,6 @@
     <nav>
         <ul>
             <div>
-
                 <li><a href="/artists">Artists</a></li>
                 <li><a href="/locations">Locations</a></li>
                 <li><a href="/dates">Dates</a></li>
@@ -26,7 +26,7 @@
             <h2>Filter by</h2>
         <form action="/filter">
             <div class="creation-filter">
-                <input type="checkbox" name="creationdate" onchange="syncSliders(), toggleFields()" >
+                <input type="checkbox" name="creationdate" onchange="toggleFields()" >
                 <label for="creationdate">Creation Date</label>
                 <input type="number" name="datdebut" placeholder="From" min="1962" max="2015" value="1962" disabled>
                 <input type="number" name="datfin" placeholder="To" min="1962" max="2015" value="2015" disabled required>
@@ -37,16 +37,6 @@
                 <input type="date" name="debutalbum"  min="1963-07-31" max="2018-11-15" value="1963-07-31"  disabled>
                 <input type="date" name="finalalbum" min="1963-07-31"  max="2018-11-15" value="2018-11-15" disabled required>
             </div>
-            <!-- <div class="members">
-                <input type="checkbox" name="members" onchange="toggleFields()">
-                    <div class="progress"><span class="progress-selected"></span></div>
-                    <div class="range-input">
-                         <label for="member1"><span id="valeurAffichee1">8 </span></label> 
-                        <input type="range" id="member1" class="slider1" name="member1" min="1" max="8" value="1" step="1" disabled>
-                        <input type="range" id="member2" class="slider2" name="member2" min="1" max="8" value="8" step="1" disabled>  
-                        <label for="member2"><span id="valeurAffichee2">8 </span></label> 
-                    </div>
-            </div> -->
             <div class="members">
                 <input type="checkbox" name="members" onchange="toggleFields()">
                     <div class="range-slider">
@@ -55,15 +45,16 @@
                     <div class="range-input">
                         <input type="range" id="member1" class="slider1" name="member1" min="1" max="8" value="1" step="1" disabled>
                         <input type="range" id="member2" class="slider2" name="member2" min="1" max="8" value="8" step="1" disabled>  
-                    <!-- <input type="range" class="min" min="0" max="1000" value="300" step="10">
-                    <input type="range" class="max" min="0" max="1000" value="700" step="10"> -->
                     </div>
-                <div class="range-price">      
-                  <label for="min">Min-Member</label>
-                  <input type="number" name="min" value="300">      
-                  <label for="max">Max-Member</label>
-                  <input type="number" name="max" value="700">      
-                </div>
+                    <div class="range-price">
+                        <label for="member1">
+                          <span id="valeurAffichee1" data-value="1">1</span>
+                        </label>
+                        <label for="member2">
+                          <span id="valeurAffichee2" data-value="8">8</span>
+                        </label>
+                    </div>
+                      
               </div> 
             <div class="locations">
                 <input type="checkbox" name="location" onchange="toggleFields()">
@@ -90,99 +81,5 @@
         {{end}}
     </div>
 </body>
-<script>
-    function syncSliders() {
-  // Récupérer les valeurs des curseurs
-  var value1 = parseInt(document.getElementById('member1').value);
-  var value2 = parseInt(document.getElementById('member2').value);
 
-  // Vérifier si le curseur 1 dépasse le curseur 2
-  if (value1 > value2) {
-    // Mettre à jour la valeur du curseur 1 pour qu'elle soit égale à celle du curseur 2
-    var swap= value1
-    document.getElementById('member1').value = value2;
-    value1 = value2;
-    value2=swap
-  }
-
-  // Vérifier si le curseur 2 dépasse le curseur 1
-  if (value2 < value1) {
-    // Mettre à jour la valeur du curseur 2 pour qu'elle soit égale à celle du curseur 1
-    var swap= value2
-    document.getElementById('member2').value = value1;
-    value2 = value1;
-    value1=swap
-  }
-
-  // Calculer le pourcentage de progression
-  var percentage = ((value1 - 1) / 7) * 100;
-
-  // Mettre à jour la largeur de la barre de progression
-  document.getElementById('progress').style.width = percentage + '%';
-}
-
-</script>
-<script>
-    function toggleFields() {
-  var creationCheckbox = document.querySelector('input[name="creationdate"]');
-  var creationFields = document.querySelectorAll('input[name="datdebut"], input[name="datfin"]');
-
-  var albumCheckbox = document.querySelector('input[name="firstalbum"]');
-  var albumFields = document.querySelectorAll('input[name="debutalbum"], input[name="finalalbum"]');
-
-  var membersCheckbox = document.querySelector('input[name="members"]');
-  var membersField = document.querySelectorAll('input[id="member1"], input[id="member2"]');
-
-  var locationCheckbox = document.querySelector('input[name="location"]');
-  var locationField = document.querySelector('select[name="loc"]');
-
-
-  // Basculer les champs pour creation date
-  for (var i = 0; i < creationFields.length; i++) {
-    var field = creationFields[i];
-    field.disabled = !creationCheckbox.checked;
-  }
-
-  // Basculer les champs pour first album
-  for (var i = 0; i < albumFields.length; i++) {
-    var field = albumFields[i];
-    field.disabled = !albumCheckbox.checked;
-  }
-
-  // Basculer les champs pour concert location
-  locationField.disabled = !locationCheckbox.checked;
-
-  // Basculer les champs pour members
-  for (var i = 0; i < membersField.length; i++) {
-    var field = membersField[i];
-    field.disabled = !membersCheckbox.checked;
-  }
-//    membersField.disabled = !membersCheckbox.checked;
-
-}
-    var valeurInput1 = document.getElementById("member1");
-    var valeurAffichee1 = document.getElementById("valeurAffichee1");
-
-    valeurInput1.addEventListener("input", function(){
-        valeurAffichee1.textContent = valeurInput1.value;
-    });
-
-    var valeurInput2 = document.getElementById("member2");
-    var valeurAffichee2 = document.getElementById("valeurAffichee2");
-    valeurInput2.addEventListener("input", function(){
-        valeurAffichee2.textContent = valeurInput2.value;
-    });
-
-
-    // basculer vers filter
-
-function toggleDiv() {
-  var div = document.getElementById("filter");
-  if (div.style.display === "block") {
-    div.style.display = "none"; // Afficher l'élément
-  } else {
-    div.style.display = "block"; // Masquer l'élément
-  }
-}
-</script>
 </html>

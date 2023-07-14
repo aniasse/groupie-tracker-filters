@@ -7,12 +7,12 @@
     <link rel="stylesheet" href="/static/css/style.css">
     <link rel="icon" href="/static/images/icon.jpeg">
     <title>Artists</title>
+    <script src="/static/script/form.js" defer></script>
 </head>
 <body>
     <nav>
         <ul>
             <div>
-
                 <li><a href="/artists">Artists</a></li>
                 <li><a href="/locations">Locations</a></li>
                 <li><a href="/dates">Dates</a></li>
@@ -37,9 +37,22 @@
             </div>
             <div class="members">
                 <input type="checkbox" name="members" onchange="toggleFields()">
-                <label for="members"><span id="valeurAffichee">7 </span> Members</label>
-                <input type="range" id="members" name="member" min="1" max="7" value="50" step="1" disabled><br>
-            </div>
+                    <div class="range-slider">
+                    <span class="range-selected"></span><br>
+                    </div>
+                    <div class="range-input">
+                        <input type="range" id="member1" class="slider1" name="member1" min="1" max="8" value="1" step="1" disabled>
+                        <input type="range" id="member2" class="slider2" name="member2" min="1" max="8" value="8" step="1" disabled>  
+                    </div>
+                    <div class="range-price">
+                        <label for="member1">
+                          <span id="valeurAffichee1" data-value="1">1</span>
+                        </label>
+                        <label for="member2">
+                          <span id="valeurAffichee2" data-value="8">8</span>
+                        </label>
+                    </div> 
+              </div> 
             <div class="locations">
                 <input type="checkbox" name="location" onchange="toggleFields()">
                 <label for="location">Concert location</label>
@@ -65,56 +78,4 @@
         {{end}}
     </div>
 </body>
-<script>
-    function toggleFields() {
-        var creationCheckbox = document.querySelector('input[name="creationdate"]');
-        var creationFields = document.querySelectorAll('input[name="datdebut"], input[name="datfin"]');
-
-        var albumCheckbox = document.querySelector('input[name="firstalbum"]');
-        var albumFields = document.querySelectorAll('input[name="debutalbum"], input[name="finalalbum"]');
-
-        var membersCheckbox = document.querySelector('input[name="members"]');
-        var membersField = document.querySelector('input[id="members"]');
-
-        var locationCheckbox = document.querySelector('input[name="location"]');
-        var locationField = document.querySelector('select[name="loc"]');
-
-
-        // Basculer les champs pour creation date
-        for (var i = 0; i < creationFields.length; i++) {
-                var field = creationFields[i];
-                field.disabled = !creationCheckbox.checked;
-        }
-
-        // Basculer les champs pour first album
-        for (var i = 0; i < albumFields.length; i++) {
-                var field = albumFields[i];
-                field.disabled = !albumCheckbox.checked;
-        }
-
-        // Basculer les champs pour members
-        membersField.disabled = !membersCheckbox.checked;
-
-            // Basculer les champs pour concert location
-        locationField.disabled = !locationCheckbox.checked;
-    }
-    var valeurInput = document.getElementById("members");
-    var valeurAffichee = document.getElementById("valeurAffichee");
-
-    valeurInput.addEventListener("input", function(){
-        valeurAffichee.textContent = valeurInput.value;
-    });
-
-
-    // basculer vers filter
-
-    function toggleDiv() {
-        var div = document.getElementById("filter");
-        if (div.style.display === "block") {
-            div.style.display = "none"; // Afficher l'élément
-        } else {
-            div.style.display = "block"; // Masquer l'élément
-        }
-    }
-</script>
 </html>

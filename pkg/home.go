@@ -90,11 +90,11 @@ func HandleFilterDetail(w http.ResponseWriter, r *http.Request) {
 		return timeDates[i].Before(timeDates[j])
 	})
 	formattedDate := []string{}
-	// Affichage des dates triées
+	// Put the date sort in a slice
 	for _, date := range timeDates {
 		formattedDate = append(formattedDate, date.Format("02-01-2006"))
 	}
-	fmt.Println(formattedDate)
+
 	Rel := GetRelationData()
 	Filt := []Artist{}
 	var (
@@ -102,7 +102,8 @@ func HandleFilterDetail(w http.ResponseWriter, r *http.Request) {
 		dat_fin     int
 		debut_album time.Time
 		final_album time.Time
-		member      int
+		member1     int
+		member2     int
 	)
 	if !Active(creat_date) {
 		if len(creation_date) != 0 {
@@ -168,8 +169,11 @@ func HandleFilterDetail(w http.ResponseWriter, r *http.Request) {
 			}
 		}
 	} else if Active(checkb_members) && !Active(checkb_location) {
-		consmem, _ := strconv.Atoi(r.FormValue("member"))
-		member = consmem
+		consmem1, _ := strconv.Atoi(r.FormValue("member1"))
+		consmem2, _ := strconv.Atoi(r.FormValue("member2"))
+
+		member1 = consmem1
+		member2 = consmem2
 
 		for _, v := range Art {
 			pars := v.Afalbum
@@ -178,7 +182,7 @@ func HandleFilterDetail(w http.ResponseWriter, r *http.Request) {
 				fmt.Println("Erreur lors de l'analyse de la date :", err)
 				return
 			}
-			if (v.Acread >= dat_debut && v.Acread <= dat_fin) && len(v.Amember) == member && (dat.After(debut_album) && dat.Before(final_album)) {
+			if (v.Acread >= dat_debut && v.Acread <= dat_fin) && (len(v.Amember) >= member1 && len(v.Amember) <= member2) && (dat.After(debut_album) && dat.Before(final_album)) {
 
 				Filt = append(Filt, v)
 			}
@@ -207,8 +211,11 @@ func HandleFilterDetail(w http.ResponseWriter, r *http.Request) {
 		}
 	} else if Active(checkb_members) && Active(checkb_location) {
 		loca := r.FormValue("loc")
-		consmem, _ := strconv.Atoi(r.FormValue("member"))
-		member = consmem
+		consmem1, _ := strconv.Atoi(r.FormValue("member1"))
+		consmem2, _ := strconv.Atoi(r.FormValue("member2"))
+
+		member1 = consmem1
+		member2 = consmem2
 		ind := 0
 		for i := ind; i < len(Art); i++ {
 			for i = ind; i < len(Rel.Relat); i++ {
@@ -219,7 +226,7 @@ func HandleFilterDetail(w http.ResponseWriter, r *http.Request) {
 					return
 				}
 				for key := range Rel.Relat[i].IRdatloc {
-					if (Art[i].Acread >= dat_debut && Art[i].Acread <= dat_fin) && (dat.After(debut_album) && dat.Before(final_album)) && (len(Art[i].Amember) == member) && (key == loca) {
+					if (Art[i].Acread >= dat_debut && Art[i].Acread <= dat_fin) && (dat.After(debut_album) && dat.Before(final_album)) && (len(Art[i].Amember) >= member1 && len(Art[i].Amember) <= member2) && (key == loca) {
 						Filt = append(Filt, Art[i])
 
 					}
