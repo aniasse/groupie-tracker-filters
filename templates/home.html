@@ -15,6 +15,7 @@
     <nav>
         <ul>
             <div>
+                <li><a href="/">Home</a></li>
                 <li><a href="/artists">Artists</a></li>
                 <li><a href="/locations">Locations</a></li>
                 <li><a href="/dates">Dates</a></li>
@@ -39,6 +40,7 @@
             </div>
             <div class="members">
                 <input type="checkbox" name="members" onchange="toggleFields()">
+                <label for="members">Members</label>
                     <div class="range-slider">
                     <span class="range-selected"></span><br>
                     </div>
@@ -60,7 +62,7 @@
                 <input type="checkbox" name="location" onchange="toggleFields()">
                 <label for="location">Concert location</label>
                 <select name="loc" disabled>
-                {{range .Locations}}<option value="{{.}}"> {{.}}</option>{{end}}
+                {{range .LocatFilt}}<option value="{{.}}"> {{.}}</option>{{end}}
                 </select>
             </div>
             <input type="submit" name="enter" value="Filter" class="filter-btn">

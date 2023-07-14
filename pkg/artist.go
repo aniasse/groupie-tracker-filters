@@ -36,7 +36,7 @@ type OneArtist struct {
 
 type Filter struct {
 	Artists   []Artist
-	Locations []string
+	LocatFilt []string
 }
 
 func GetArtistData() []Artist {
@@ -80,7 +80,7 @@ func HandleArtist(w http.ResponseWriter, r *http.Request) {
 	}
 	NewFilter := Filter{
 		Artists:   Art,
-		Locations: Loc,
+		LocatFilt: Loc,
 	}
 	temp := template.Must(template.ParseFiles("templates/artist.html"))
 	err := temp.Execute(w, NewFilter)

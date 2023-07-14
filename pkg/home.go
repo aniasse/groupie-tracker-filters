@@ -9,6 +9,13 @@ import (
 	"time"
 )
 
+type FilterDetail struct {
+	Art       []Artist
+	FilterLoc []string
+}
+
+var NewFilter Filter
+
 func HandleHome(w http.ResponseWriter, r *http.Request) {
 
 	err := template.Must(template.ParseFiles("templates/home.html")).Execute(w, nil)
@@ -39,8 +46,8 @@ func HandleFilter(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	NewFilter := Filter{
-		Locations: tabloc,
+	NewFilter = Filter{
+		LocatFilt: tabloc,
 	}
 
 	err := template.Must(template.ParseFiles("templates/home.html")).Execute(w, NewFilter)
@@ -235,8 +242,11 @@ func HandleFilterDetail(w http.ResponseWriter, r *http.Request) {
 			}
 		}
 	}
-
-	err := template.Must(template.ParseFiles("templates/filter.html")).Execute(w, Filt)
+	NewFilterDetail := FilterDetail{
+		Art:       Filt,
+		FilterLoc: NewFilter.LocatFilt,
+	}
+	err := template.Must(template.ParseFiles("templates/filter.html")).Execute(w, NewFilterDetail)
 	if err != nil {
 		fmt.Println("Erreur", err)
 	}
