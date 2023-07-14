@@ -13,7 +13,6 @@ func main() {
 	http.Handle("/", errorHandler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case "/":
-			//pkg.HandleHome(w, r)
 			pkg.HandleFilter(w, r)
 		case "/artists":
 			pkg.HandleArtist(w, r)

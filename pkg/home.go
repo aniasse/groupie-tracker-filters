@@ -16,14 +16,6 @@ type FilterDetail struct {
 
 var NewFilter Filter
 
-func HandleHome(w http.ResponseWriter, r *http.Request) {
-
-	err := template.Must(template.ParseFiles("templates/home.html")).Execute(w, nil)
-	if err != nil {
-		fmt.Println("Erreur de l'execution du template", err)
-	}
-}
-
 func HandleFilter(w http.ResponseWriter, r *http.Request) {
 
 	location := GetLocationData()
