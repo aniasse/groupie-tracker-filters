@@ -245,6 +245,31 @@ nav ul li a:hover {
         margin:auto;
         cursor: pointer;
     }
+    .artist-image{
+        display: block;
+        margin: auto;
+        height: 90px;
+        width: 90px;
+        border-radius: 50%;
+    }
+    .title h1{
+        font-size: x-large;
+    }
+    .artist-item h3{
+        font-size: large;
+    }
+    .artist-info h3{
+        font-size: large;
+    }
+    .artist-creation-date{
+        font-size: large;
+    }
+    .artist-first-album{
+        font-size: large;
+    }
+    .artist-locations-title{
+        font-size: large;
+    }
 }
 
 @media only screen and  (max-width: 1000px) {
@@ -303,5 +328,31 @@ nav ul li a:hover {
         font-size: small;
         margin:auto;
     }
+    .artist-image{
+        display: block;
+        margin: auto;
+        height: 90px;
+        width: 90px;
+        border-radius: 50%;
+    }
+    .title h1{
+        font-size: x-large;
+    }
+    .artist-item h3{
+        font-size: large;
+    }
+    .artist-info h3{
+        font-size: large;
+    }
+    .artist-creation-date{
+        font-size: large;
+    }
+    .artist-first-album{
+        font-size: large;
+    }
+    .artist-locations-title{
+        font-size: large;
+    }
+
 }
 

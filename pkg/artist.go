@@ -58,27 +58,17 @@ func GetArtistData(api string) []Artist {
 
 func HandleArtist(w http.ResponseWriter, r *http.Request) {
 
-	Loc := []string{}
-	for _, v := range GetLocationData("https://groupietrackers.herokuapp.com/api/locations").Loc {
-		Loc = append(Loc, v.Loca...)
-	}
-	for i := 0; i < len(Loc); i++ {
-		for j := i + 1; j < len(Loc); j++ {
-			if Loc[i] > Loc[j] {
-				swap := Loc[i]
-				Loc[i] = Loc[j]
-				Loc[j] = swap
-			}
-		}
-	}
+	loc := GetLocationData("https://groupietrackers.herokuapp.com/api/locations")
+	tabloc := TabLoc(loc)
+
 	Art := GetArtistData("https://groupietrackers.herokuapp.com/api/artists")
 
-	NewFilter := Filter{
+	FilterArtist := Filter{
 		Artists:   Art,
-		LocatFilt: Loc,
+		LocatFilt: tabloc,
 	}
 	temp := template.Must(template.ParseFiles("templates/artist.html", "templates/form.html", "templates/navbar.html"))
-	err := temp.Execute(w, NewFilter)
+	err := temp.Execute(w, FilterArtist)
 	if err != nil {
 		fmt.Println("Erreur lors de l'execution du template", err)
 	}

@@ -12,7 +12,7 @@
     {{define "ExtraItem"}} 
         <img src="/static/images/filtre.jpg" alt=""  class="filter-icon" onclick="toggleDiv()" >
     {{end}}
-    {{template "navbar"}}
+    {{template "navbar" .}}
     
     {{template "form" .}}
     <div class="container">    

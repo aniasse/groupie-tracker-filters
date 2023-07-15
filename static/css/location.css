@@ -53,7 +53,7 @@ nav ul li a:hover {
     color: #000;
 }
 .location-item {
-    flex: 0 0 calc(33.33% - 10px);
+    flex: 0 0 calc(33.33% - 20px);
     margin: 10px;
     padding: 20px;
     text-align: center;
@@ -81,12 +81,12 @@ nav ul li a:hover {
     border: #efe7e7;
     border-width: 2px;
  }
-  /* .artist-item a {
+  .artist-item a {
     display: block;
     text-decoration: none;
     color: rgb(230, 72, 9);
     transition: all 0.3s ease;
-  } */
+  }
   
   .artist-item img {
     width: 300px;
@@ -316,6 +316,8 @@ nav ul li a:hover {
     color: #e4dcdc;
 }
 
+
+
 .date-item{
     background-color: #c6bdbd;
     color: #000;
@@ -325,12 +327,30 @@ nav ul li a:hover {
     color: #e4dcdc;
 }
 
+/* Les media query */
 
-@media screen and (max-width: 1000px){
+@media (max-width: 1000px){
     .date-list {
         grid-template-columns: repeat(4, 1fr);
     }
     .location-list{
+        display: none;
+    }
+    .artist-item{
+        width: 98%;
+        justify-items: center;
+        text-align: center;
+    }
+    .location-info h2 {
+        font-size: large;
+    }
+    .location-info h3{
+        font-size: large;
+    }
+    nav ul li a {
+        font-size: 10px;
+    }
+    .date-list-item{
         display: none;
     }
 }
@@ -355,18 +375,9 @@ nav ul li a:hover {
     }
 
     .artist-list {
+        display:none
+    }
 
-        display: none;
-       
-    }
-    .artist-image{
-        height: 90px;
-        width: 90px;
-        border-radius: 50%;
-    }
-    .artist-name{
-        font-size: 20px;
-    }
     .artist-item-inline {
         display: inline-block;
         margin-right: 10px;
@@ -378,16 +389,65 @@ nav ul li a:hover {
     .artist-locations {
         width: 100%;
     }
-    
+    .artist-item{
+        width: 98%;
+        justify-items: center;
+        text-align: center;
+    }  
+    .location-info h2{
+        font-size: small;
+    } 
+    .location-info h3{
+        font-size: large;
+    }
+    nav ul li a {
+        font-size: 10px;
+    }
+    .date-list-item{
+        display: none;
+    }
 }
 
-@media screen and (max-width: 480px) {
+@media (max-width: 480px) {
     .location-item {
-        /* flex: 0 0 calc(10% - 20px); */
-        display: block;
+        flex: 0 0 calc(100% - 20px);
     }
     .date-list {
         grid-template-columns: repeat(2, 1fr);
+    }
+    .artist-item img {
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 50%;
+        margin-bottom: 10px;
+    }
+    .location-list{
+        display: none;
+    }
+    .artist-item{
+        width: 98%;
+        justify-items: center;
+        text-align: center;
+    }
+    .location-info h2{
+        font-size: small;
+    }
+    .location-info h3{
+        font-size: large;
+    }
+    nav ul li a {
+        font-size: 10px;
+    }
+    .date-list-item{
+        display: none;
+    }
+}
+
+@media screen and (max-width: 400px) {
+
+    nav ul li a {
+        font-size: 10px;
     }
     .artist-item img {
         width: 90px;
@@ -396,20 +456,21 @@ nav ul li a:hover {
         border-radius: 50%;
         margin-bottom: 10px;
     }
+    .artist-item{
+        width: 98%;
+        justify-items: center;
+        text-align: center;
+    }
     .location-list{
         display: none;
     }
-}
-
-@media screen and (max-width:400) {
-    .artist-item img {
-        width: 50px;
-        height: 50px;
-        object-fit: cover;
-        border-radius: 50%;
-        margin-bottom: 10px;
+    .location-info h2{
+        font-size: large;
     }
-    .location-list{
+    .location-info h3{
+        font-size: large;
+    }
+    .date-list-item{
         display: none;
     }
 }

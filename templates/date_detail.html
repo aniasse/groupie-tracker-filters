@@ -11,7 +11,7 @@
 </head>
 <body>
     {{define "ExtraItem"}} {{end}}
-    {{template "navbar"}}
+    {{template "navbar" .}}
     <div class="date-detail">
         <h2>Date: {{.Even}}</h2>
         <div class="date-info">
@@ -23,18 +23,17 @@
         {{range $index, $val := $images}}
             {{$name := index $names $index}}
             {{$loc := index $location $index}}
-<div class="artist-item">
-            <img src="{{$val}}" alt="">
-            <h3>{{$name}}</h3> <br>
-            <h3>Location : {{$loc}}</h3>
-        </div>
+                <div class="artist-item">
+                    <img src="{{$val}}" alt="">
+                    <h3>{{$name}}</h3> <br>
+                    <h3>Location : {{$loc}}</h3>
+                </div>
         {{end}}
-    </div>
-    </div>
+            </div>
+        </div>
     </div>
     
-    </div>
-    <div class="date-list">
+    <div class="date-list-item">
         
         {{range $key, $val := .GlobDat}}
             <label for="select-{{$key}}">{{$key}}</label>

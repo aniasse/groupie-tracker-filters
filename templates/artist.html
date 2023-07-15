@@ -13,9 +13,9 @@
     {{define "ExtraItem"}} 
         <img src="/static/images/filtre.jpg" alt=""  class="filter-icon" onclick="toggleDiv()" >
     {{end}}
-    {{template "navbar"}}
+    {{template "navbar" .}}
     
-    {{template "form"}}  <!--Appel de la page contenant le formulaire-->
+    {{template "form" .}}  <!--Appel de la page contenant le formulaire-->
     <div class="title">
             <h1>ARTISTS</h1>
         </div> 
