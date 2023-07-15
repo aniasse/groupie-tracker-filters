@@ -34,15 +34,10 @@ type OneArtist struct {
 	ListArtists []Artist
 }
 
-type Filter struct {
-	Artists   []Artist
-	LocatFilt []string
-}
+func GetArtistData(api string) []Artist {
 
-func GetArtistData() []Artist {
-
-	artist_api := "https://groupietrackers.herokuapp.com/api/artists"
-	content, err := http.Get(artist_api)
+	// artist_api := "https://groupietrackers.herokuapp.com/api/artists"
+	content, err := http.Get(api)
 	if err != nil {
 		fmt.Println("Erreur de recuperation des donnees", err)
 	}
@@ -63,10 +58,8 @@ func GetArtistData() []Artist {
 
 func HandleArtist(w http.ResponseWriter, r *http.Request) {
 
-	Art := GetArtistData()
-
 	Loc := []string{}
-	for _, v := range GetLocationData().Loc {
+	for _, v := range GetLocationData("https://groupietrackers.herokuapp.com/api/locations").Loc {
 		Loc = append(Loc, v.Loca...)
 	}
 	for i := 0; i < len(Loc); i++ {
@@ -78,6 +71,8 @@ func HandleArtist(w http.ResponseWriter, r *http.Request) {
 			}
 		}
 	}
+	Art := GetArtistData("https://groupietrackers.herokuapp.com/api/artists")
+
 	NewFilter := Filter{
 		Artists:   Art,
 		LocatFilt: Loc,
@@ -95,12 +90,12 @@ func HandleArtistDeatail(w http.ResponseWriter, r *http.Request) {
 	artistID := r.URL.Query().Get("Id")
 	artistid, _ := strconv.Atoi(artistID)
 
-	Artists := GetArtistData()
 	artist := Artist{}
 	if artistid < 1 || artistid > 52 {
-		GetStatus(w, "error404")
+		error404Handler(w, r)
 	} else {
 
+		Artists := GetArtistData("https://groupietrackers.herokuapp.com/api/artists")
 		artist = Artists[artistid-1]
 
 		relation := artist.Arelat

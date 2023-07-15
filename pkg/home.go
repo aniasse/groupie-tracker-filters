@@ -10,34 +10,18 @@ import (
 	"time"
 )
 
-// type FilterDetail struct {
-// 	Art       []Artist
-// 	LocatFilt []string
-// }
+type Filter struct {
+	Artists   []Artist
+	LocatFilt []string
+}
 
 var NewFilter Filter
 
 func HandleFilter(w http.ResponseWriter, r *http.Request) {
 
-	location := GetLocationData()
-	tabloc := []string{}
+	location := GetLocationData("https://groupietrackers.herokuapp.com/api/locations")
 
-	for _, v := range location.Loc {
-		for i := 0; i < len(v.Loca); i++ {
-			if !NoRepeatLoc(tabloc, v.Loca[i]) {
-				tabloc = append(tabloc, v.Loca[i])
-			}
-		}
-	}
-	for i := 0; i < len(tabloc); i++ {
-		for j := i + 1; j < len(tabloc); j++ {
-			if tabloc[i] > tabloc[j] {
-				swap := tabloc[i]
-				tabloc[i] = tabloc[j]
-				tabloc[j] = swap
-			}
-		}
-	}
+	tabloc := TabLoc(location) //Recuperation et arrangemet des locations
 
 	NewFilter = Filter{
 		LocatFilt: tabloc,
@@ -61,7 +45,7 @@ func HandleFilterDetail(w http.ResponseWriter, r *http.Request) {
 		checkb_members := r.FormValue("members")
 		checkb_location := r.FormValue("location")
 
-		Art := GetArtistData()
+		Art := GetArtistData("https://groupietrackers.herokuapp.com/api/artists")
 		var creation_date []int
 		for _, v := range Art {
 			if !NoRepeatInt(creation_date, v.Acread) {
@@ -78,6 +62,7 @@ func HandleFilterDetail(w http.ResponseWriter, r *http.Request) {
 				}
 			}
 		}
+
 		album := []string{}
 		for _, v := range Art {
 			album = append(album, v.Afalbum)
@@ -99,7 +84,6 @@ func HandleFilterDetail(w http.ResponseWriter, r *http.Request) {
 			formattedDate = append(formattedDate, date.Format("02-01-2006"))
 		}
 
-		Rel := GetRelationData()
 		Filt := []Artist{}
 		var (
 			dat_debut   int
@@ -158,7 +142,9 @@ func HandleFilterDetail(w http.ResponseWriter, r *http.Request) {
 			final_album = date2
 		}
 
-		if !Active(checkb_members) && !Active(checkb_location) {
+		Rel := GetRelationData("https://groupietrackers.herokuapp.com/api/relation")
+
+		if !Active(checkb_members) && !Active(checkb_location) { //If the memmber and location are not checked
 
 			for _, v := range Art {
 				pars := v.Afalbum
@@ -172,7 +158,8 @@ func HandleFilterDetail(w http.ResponseWriter, r *http.Request) {
 					Filt = append(Filt, v)
 				}
 			}
-		} else if Active(checkb_members) && !Active(checkb_location) {
+		} else if Active(checkb_members) && !Active(checkb_location) { //If the member is checked and the location isn't checked
+
 			consmem1, _ := strconv.Atoi(r.FormValue("member1"))
 			consmem2, _ := strconv.Atoi(r.FormValue("member2"))
 
@@ -192,7 +179,7 @@ func HandleFilterDetail(w http.ResponseWriter, r *http.Request) {
 				}
 			}
 
-		} else if !Active(checkb_members) && Active(checkb_location) {
+		} else if !Active(checkb_members) && Active(checkb_location) { //If the location is checked and the member isn't checked
 
 			loca := r.FormValue("loc")
 			ind := 0
@@ -213,7 +200,8 @@ func HandleFilterDetail(w http.ResponseWriter, r *http.Request) {
 					ind++
 				}
 			}
-		} else if Active(checkb_members) && Active(checkb_location) {
+		} else if Active(checkb_members) && Active(checkb_location) { //If the member and the location are checked
+
 			loca := r.FormValue("loc")
 			consmem1, _ := strconv.Atoi(r.FormValue("member1"))
 			consmem2, _ := strconv.Atoi(r.FormValue("member2"))

@@ -108,8 +108,6 @@ nav ul li a:hover {
   
 }
 
-
-
 #filter h2 {
     margin-bottom: 20px;
 }
@@ -216,12 +214,47 @@ nav ul li a:hover {
 .filter-btn{
     width: 100px;
     font-size: larger;
-    margin-left: 40%;
+    margin:auto;
+    cursor: pointer;
 }
 
 /* Media queries pour la réactivité */
 
-@media (max-width: 1000px) {
+@media only screen and  (max-width: 400px) {
+    
+    nav ul {
+        list-style-type: none;
+    }
+    .filter-icon{
+        float: left;
+        cursor: pointer;
+        height: 30px;
+        width: 30px;
+        border-radius: 50%;
+    }
+    #filter{
+        height: 300px;
+        overflow-y: auto;
+    }
+    label{
+        font-size: small;
+    }
+    .filter-btn{
+        width: auto;
+        /* font-size: ; */
+        margin:auto;
+        cursor: pointer;
+    }
+}
+
+@media only screen and  (max-width: 1000px) {
+    nav ul{
+        display: flex;
+        height: auto;
+    }
+    nav ul div{
+        display: block;
+    }
     .content {
         margin-top: 100px;
         flex-wrap: nowrap;
@@ -239,6 +272,7 @@ nav ul li a:hover {
     }
     #filter{
         position: relative;
+        
    }
    .creation-filter,
     .first-album,
@@ -265,8 +299,9 @@ nav ul li a:hover {
         right: 0px;
     }
     .filter-btn{
-        width: 80px;
-        font-size: larger;
-        margin-left: 5%;
+        width: auto;
+        font-size: small;
+        margin:auto;
     }
 }
+

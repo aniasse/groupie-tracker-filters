@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/css/location.css">
     <link rel="stylesheet" href="/static/css/style.css">
+    <script src="/static/script/date.js" defer></script>
     <title>Date</title>
 </head>
 <body>
@@ -22,17 +23,5 @@
             </select>
         {{end}}
     </div>
-
-    <script>
-        var selectOptions = document.querySelectorAll('.select-option');
-        selectOptions.forEach(function(select) {
-            select.onchange = function() {
-                var selectedOption = select.options[select.selectedIndex];
-                var url = selectedOption.value;
-
-                window.location.href=url;
-            };
-        });
-    </script>
 </body>
 </html>

@@ -16,9 +16,9 @@ type Relation struct {
 	Relat []IndexRelat `json:"index"`
 }
 
-func GetRelationData() Relation {
+func GetRelationData(api_relation string) Relation {
 
-	api_relation := "https://groupietrackers.herokuapp.com/api/relation"
+	// api_relation := "https://groupietrackers.herokuapp.com/api/relation"
 	data_api, err := http.Get(api_relation)
 	if err != nil {
 		fmt.Println("Erreur lors de la recuperation des donnees", err)

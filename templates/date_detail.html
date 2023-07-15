@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="/static/css/location.css">
     <link rel="stylesheet" href="/static/css/style.css">
     <link rel="icon" href="/static/images/icon.jpeg">
+    <script src="/static/script/date.js" defer></script>
     <title>Date Infos</title>
 </head>
 <body>
@@ -43,17 +44,5 @@
             </select>
         {{end}}
     </div>
-
-    <script>
-        var selectOptions = document.querySelectorAll('.select-option');
-        selectOptions.forEach(function(select) {
-            select.onchange = function() {
-                var selectedOption = select.options[select.selectedIndex];
-                var url = selectedOption.value;
-
-                window.location.href=url;
-            };
-        });
-    </script>
 </body>
 </html>

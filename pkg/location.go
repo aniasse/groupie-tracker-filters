@@ -32,9 +32,9 @@ type LocationInfo struct {
 
 var NewLocalisation Localisation
 
-func GetLocationData() Location {
+func GetLocationData(api_loc string) Location {
 
-	api_loc := "https://groupietrackers.herokuapp.com/api/locations"
+	//api_loc := "https://groupietrackers.herokuapp.com/api/locations"
 	data_api, err := http.Get(api_loc)
 	if err != nil {
 		fmt.Println("Erreur de recuperation des donnees", err)
@@ -56,10 +56,106 @@ func GetLocationData() Location {
 
 func HandleLocation(w http.ResponseWriter, r *http.Request) {
 
-	location := GetLocationData()
+	location := GetLocationData("https://groupietrackers.herokuapp.com/api/locations")
+
+	tabloc := TabLoc(location)
+
+	// for _, v := range location.Loc {
+	// 	for i := 0; i < len(v.Loca); i++ {
+	// 		if !NoRepeatLoc(tabloc, v.Loca[i]) {
+	// 			tabloc = append(tabloc, v.Loca[i])
+	// 		}
+	// 	}
+	// }
+	// for i := 0; i < len(tabloc); i++ {
+	// 	for j := i + 1; j < len(tabloc); j++ {
+	// 		if tabloc[i] > tabloc[j] {
+	// 			swap := tabloc[i]
+	// 			tabloc[i] = tabloc[j]
+	// 			tabloc[j] = swap
+	// 		}
+	// 	}
+	// }
+
+	NewLocalisation = Localisation{
+		Local: tabloc,
+	}
+
+	temp := template.Must(template.ParseFiles("templates/location.html", "templates/navbar.html"))
+	err := temp.Execute(w, NewLocalisation)
+	if err != nil {
+		fmt.Println("Erreur lors de l'execution du template", err)
+	}
+}
+
+func HandleLocationDetail(w http.ResponseWriter, r *http.Request) {
+
+	one_location := r.URL.Query().Get("Loc")
+
+	loc := NewLocalisation.Local
+	if CheckURL(loc, one_location) {
+		error404Handler(w, r)
+		return
+	} else {
+
+		relation := GetRelationData("https://groupietrackers.herokuapp.com/api/relation")
+
+		var (
+			datlocation [][]string
+			tab         []string
+			IdLoc       []int
+		)
+
+		for _, v := range relation.Relat {
+			if v.IRdatloc[one_location] != nil {
+				tab = v.IRdatloc[one_location]
+				datlocation = append(datlocation, tab)
+				IdLoc = append(IdLoc, v.IRid)
+			}
+		}
+		artists := GetArtistData("https://groupietrackers.herokuapp.com/api/artists")
+		ArtistLoc := []Artist{}
+
+		for _, id := range IdLoc {
+			ArtistLoc = append(ArtistLoc, artists[id-1])
+		}
+
+		stockname := []string{}
+		stockimg := []string{}
+
+		for _, v := range ArtistLoc {
+			stockname = append(stockname, v.Aname)
+			stockimg = append(stockimg, v.AImg)
+		}
+		MyLocation := []string{}
+		for _, v := range NewLocalisation.Local {
+			if v != one_location {
+				MyLocation = append(MyLocation, v)
+			}
+		}
+		NewLocationInfo := LocationInfo{
+			Loc:        one_location,
+			Artistimg:  stockimg,
+			Artistname: stockname,
+			Date:       datlocation,
+			GlobLoc:    MyLocation,
+			locat:      NewLocalisation.Local,
+		}
+
+		temp := template.Must(template.ParseFiles("templates/location_detail.html", "templates/navbar.html"))
+		err := temp.Execute(w, NewLocationInfo)
+		if err != nil {
+			fmt.Println("Erreur lors de l'execution du template", err)
+		}
+	}
+
+}
+
+func TabLoc(loc Location) []string {
+
 	tabloc := []string{}
 
-	for _, v := range location.Loc {
+	for _, v := range loc.Loc {
 		for i := 0; i < len(v.Loca); i++ {
 			if !NoRepeatLoc(tabloc, v.Loca[i]) {
 				tabloc = append(tabloc, v.Loca[i])
@@ -75,16 +171,7 @@ func HandleLocation(w http.ResponseWriter, r *http.Request) {
 			}
 		}
 	}
-
-	NewLocalisation = Localisation{
-		Local: tabloc,
-	}
-
-	temp := template.Must(template.ParseFiles("templates/location.html", "templates/navbar.html"))
-	err := temp.Execute(w, NewLocalisation)
-	if err != nil {
-		fmt.Println("Erreur lors de l'execution du template", err)
-	}
+	return tabloc
 }
 
 func NoRepeatLoc(tab []string, str string) bool {
@@ -97,66 +184,6 @@ func NoRepeatLoc(tab []string, str string) bool {
 	return false
 }
 
-func HandleLocationDetail(w http.ResponseWriter, r *http.Request) {
-
-	one_location := r.URL.Query().Get("Loc")
-
-	relation := GetRelationData()
-
-	var (
-		datlocation [][]string
-		tab         []string
-		IdLoc       []int
-	)
-
-	for _, v := range relation.Relat {
-		if v.IRdatloc[one_location] != nil {
-			tab = v.IRdatloc[one_location]
-			datlocation = append(datlocation, tab)
-			IdLoc = append(IdLoc, v.IRid)
-		}
-	}
-	artists := GetArtistData()
-	ArtistLoc := []Artist{}
-
-	for _, id := range IdLoc {
-		ArtistLoc = append(ArtistLoc, artists[id-1])
-	}
-
-	stockname := []string{}
-	stockimg := []string{}
-
-	for _, v := range ArtistLoc {
-		stockname = append(stockname, v.Aname)
-		stockimg = append(stockimg, v.AImg)
-	}
-	MyLocation := []string{}
-	for _, v := range NewLocalisation.Local {
-		if v != one_location {
-			MyLocation = append(MyLocation, v)
-		}
-	}
-	NewLocationInfo := LocationInfo{
-		Loc:        one_location,
-		Artistimg:  stockimg,
-		Artistname: stockname,
-		Date:       datlocation,
-		GlobLoc:    MyLocation,
-		locat:      NewLocalisation.Local,
-	}
-	loc := NewLocationInfo.locat
-	if CheckURL(loc, one_location) {
-		error404Handler(w, r)
-		return
-	}
-
-	temp := template.Must(template.ParseFiles("templates/location_detail.html", "templates/navbar.html"))
-	err := temp.Execute(w, NewLocationInfo)
-	if err != nil {
-		fmt.Println("Erreur lors de l'execution du template", err)
-	}
-
-}
 func CheckURL(tab []string, str string) bool {
 
 	count := 0
