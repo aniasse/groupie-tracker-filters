@@ -116,7 +116,7 @@ func HandleDateInfo(w http.ResponseWriter, r *http.Request) {
 	date := NewDatEvent.data
 
 	if CheckURL(date, user_date) { //Checked the date of the client
-		error404Handler(w, r)
+		Error404Handler(w, r)
 		return
 	} else {
 

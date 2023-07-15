@@ -36,7 +36,7 @@ func HandleFilter(w http.ResponseWriter, r *http.Request) {
 func HandleFilterDetail(w http.ResponseWriter, r *http.Request) {
 
 	if r.URL.Path == "/filter" && strings.ToUpper(r.Method) != http.MethodPost {
-		error405Handler(w, r)
+		Error405Handler(w, r)
 	} else {
 
 		//Les champs coches par l'utiisateur

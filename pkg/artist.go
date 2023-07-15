@@ -82,7 +82,7 @@ func HandleArtistDeatail(w http.ResponseWriter, r *http.Request) {
 
 	artist := Artist{}
 	if artistid < 1 || artistid > 52 {
-		error404Handler(w, r)
+		Error404Handler(w, r)
 	} else {
 
 		Artists := GetArtistData("https://groupietrackers.herokuapp.com/api/artists")

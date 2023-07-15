@@ -7,45 +7,47 @@ import (
 )
 
 // error500Handler manage the HTTP Response with an error 500 (Internal Server Error).
-func error500Handler(w http.ResponseWriter, r *http.Request) {
+func Error500Handler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusInternalServerError)
 	tmpl := template.Must(template.ParseFiles("templates/error500.html"))
 	tmpl.Execute(w, nil)
 }
 
 // error404Handler manage the HTTP Response with an error 404 (Not Found).
-func error404Handler(w http.ResponseWriter, r *http.Request) {
+func Error404Handler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusNotFound)
 	tmpl := template.Must(template.ParseFiles("templates/error404.html"))
 	tmpl.Execute(w, nil)
 }
 
 // error400Handler manage the HTTP Response with an error 400 (Bad Request).
-func error400Handler(w http.ResponseWriter, r *http.Request) {
+func Error400Handler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusBadRequest)
 	tmpl := template.Must(template.ParseFiles("templates/error400.html"))
 	err := tmpl.Execute(w, nil)
 	if err != nil {
-		handleError(w, r, http.StatusInternalServerError)
+		HandleError(w, r, http.StatusInternalServerError)
 		return
 	}
 }
 
-func error405Handler(w http.ResponseWriter, r *http.Request) {
+// error405Handler manage the HTTP Response with an error 405 (Method Not Allowed).
+func Error405Handler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusMethodNotAllowed)
 	tmpl := template.Must(template.ParseFiles("templates/error405.html"))
 	err := tmpl.Execute(w, nil)
 	if err != nil {
-		handleError(w, r, http.StatusMethodNotAllowed)
+		HandleError(w, r, http.StatusMethodNotAllowed)
 		return
 	}
 }
 
 // handleError handles HTTP errors and redirects to the appropriate error handlers.
-func handleError(w http.ResponseWriter, r *http.Request, statusCode int) {
+func HandleError(w http.ResponseWriter, r *http.Request, statusCode int) {
+
 	switch statusCode {
 	case http.StatusNotFound:
-		error404Handler(w, r)
+		Error404Handler(w, r)
 	case http.StatusInternalServerError:
 		// Retrieve the server's internal error code
 		errorCode := http.StatusInternalServerError
@@ -54,28 +56,28 @@ func handleError(w http.ResponseWriter, r *http.Request, statusCode int) {
 		switch errorCode {
 		case http.StatusInternalServerError:
 			// Manage the 500 error (Internal Server Error)
-			error500Handler(w, r)
+			Error500Handler(w, r)
 		default:
 			// Manage the other errors internes
 			http.Error(w, "Autre erreur interne", errorCode)
 		}
 	case http.StatusBadRequest:
-		error400Handler(w, r)
+		Error400Handler(w, r)
 	case http.StatusMethodNotAllowed:
-		error405Handler(w, r)
+		Error405Handler(w, r)
 	default:
 		// Manage the unexpected error
-		error500Handler(w, r)
+		Error500Handler(w, r)
 	}
 }
 
 // errorHandler is a middleware application for handling errors when processing HTTP requests.
-func errorHandler(next http.Handler) http.Handler {
+func ErrorHandler(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		defer func() {
 			if r := recover(); r != nil {
 				fmt.Println("Erreur interne du serveur:", r)
-				error500Handler(w, nil)
+				Error500Handler(w, nil)
 			}
 		}()
 

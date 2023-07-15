@@ -94,7 +94,7 @@ func HandleLocationDetail(w http.ResponseWriter, r *http.Request) {
 
 	loc := NewLocalisation.Local
 	if CheckURL(loc, one_location) {
-		error404Handler(w, r)
+		Error404Handler(w, r)
 		return
 	} else {
 
