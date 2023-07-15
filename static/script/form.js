@@ -28,23 +28,6 @@ rangeInput.forEach((input, index) => {
         });
 });
 
-//Ce qui permet a l'utilisateur de saisir un interval
-// rangePrice.forEach((input) => {
-//     input.addEventListener("input", (e) => {
-//         let minPrice = rangePrice[0].value;
-//         let maxPrice = rangePrice[1].value;
-//         if (maxPrice - minPrice >= rangeMin && maxPrice <= rangeInput[1].max) {
-//             if (e.target.className === "min") {
-//                 rangeInput[0].value = minPrice;
-//                 range.style.left = (minPrice / rangeInput[0].max) * 100 + "%";
-//             } else {
-//                 rangeInput[1].value = maxPrice;
-//                 range.style.right = 100 - (maxPrice / rangeInput[1].max) * 100 + "%";
-//             }
-//         }
-//     });
-// });
-
 
 function toggleFields() {
     var creationCheckbox = document.querySelector('input[name="creationdate"]');
