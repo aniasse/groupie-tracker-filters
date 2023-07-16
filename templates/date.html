@@ -9,11 +9,13 @@
     <title>Date</title>
 </head>
 <body>
-    {{define "ExtraItem"}} {{end}}
-    {{template "navbar" .}}
-    <div class="title">
-        <h1>DATES</h1>
-    </div> 
+    <div class="fixe-nav">
+        {{define "ExtraItem"}} {{end}}
+        {{template "navbar" .}}
+        <div class="title">
+            <h1>DATES</h1>
+        </div> 
+    </div>
     <div class="date-list">
         {{range $key, $val := .Date}}
             <label for="select-{{$key}}">{{$key}}</label>

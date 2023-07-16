@@ -9,12 +9,14 @@
     <title>Result-Filter</title>
 </head>
 <body>
-    {{define "ExtraItem"}} 
-        <img src="/static/images/filtre.jpg" alt=""  class="filter-icon" onclick="toggleDiv()" >
-    {{end}}
-    {{template "navbar" .}}
-    
-    {{template "form" .}}
+    <div class="fixe-nav">
+        {{define "ExtraItem"}} 
+            <img src="/static/images/filtre.jpg" alt=""  class="filter-icon" onclick="toggleDiv()" >
+        {{end}}
+        {{template "navbar" .}}
+        
+        {{template "form" .}}
+    </div>
     <div class="container">    
         {{range .Artists}}
         <div class="artist-item">

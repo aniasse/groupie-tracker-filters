@@ -276,7 +276,7 @@ nav ul li a:hover {
   
 /*style pour la page date*/
 
-.date-list {
+.date-list, .date-list-item {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     justify-content: center;
@@ -288,17 +288,17 @@ nav ul li a:hover {
     border-radius: 16px;
     transition: transform 0.3s ease;
 }
-.date-list:hover {
+.date-list:hover, .date-list-item:hover{
     transform: translateY(-5px);
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
 }
-.date-list a {
+.date-list a,  .date-list-item a{
     text-decoration: none;
     color: black;
     font-weight: bold;
     transition: color 0.3s ease;
 }
-.date-list div {
+.date-list div, .date-list-item div {
     border: 1px solid #ccc;
     border-radius: 10px;
 
@@ -353,6 +353,24 @@ nav ul li a:hover {
     .date-list-item{
         display: none;
     }
+    .fixe-nav{
+        width: 100%;
+        position: fixed;
+        margin-left: -10px;
+        margin-top: -10px;
+    }
+    .container{
+        overflow-y: auto;
+        margin-top: 150px;
+    }
+    .title h1{
+        color: white;
+        background-color:  rgb(75, 73, 73);
+    }
+    .date-list{
+        margin-top: 150px;
+        overflow-y: auto;
+    }
 }
 
 @media (max-width: 768px) {
@@ -406,6 +424,24 @@ nav ul li a:hover {
     .date-list-item{
         display: none;
     }
+    .fixe-nav{
+        width: 100%;
+        position: fixed;
+        margin-left: -10px;
+        margin-top: -10px;
+    }
+    .container{
+        overflow-y: auto;
+        margin-top: 150px;
+    }
+    .title h1{
+        color: white;
+        background-color:  rgb(75, 73, 73);
+    }
+    .date-list{
+        margin-top: 150px;
+        overflow-y: auto;
+    }
 }
 
 @media (max-width: 480px) {
@@ -442,6 +478,24 @@ nav ul li a:hover {
     .date-list-item{
         display: none;
     }
+    .fixe-nav{
+        width: 100%;
+        position: fixed;
+        margin-left: -10px;
+        margin-top: -10px;
+    }
+    .container{
+        overflow-y: auto;
+        margin-top: 150px;
+    }
+    .title h1{
+        color: white;
+        background-color:  rgb(75, 73, 73);
+    }
+    .date-list{
+        margin-top: 150px;
+        overflow-y: auto;
+    }
 }
 
 @media screen and (max-width: 400px) {
@@ -472,5 +526,23 @@ nav ul li a:hover {
     }
     .date-list-item{
         display: none;
+    }
+    .fixe-nav{
+        width: 100%;
+        position: fixed;
+        margin-left: -10px;
+        margin-top: -10px;
+    }
+    .container{
+        overflow-y: auto;
+        margin-top: 150px;
+    }
+    .title h1{
+        color: white;
+        background-color:  rgb(75, 73, 73);
+    }
+    .date-list{
+        margin-top: 150px;
+        overflow-y: auto;
     }
 }

@@ -10,17 +10,19 @@
     <script src="/static/script/form.js" defer></script>
 </head>
 <body>
-    {{define "ExtraItem"}} 
-        <img src="/static/images/filtre.jpg" alt=""  class="filter-icon" onclick="toggleDiv()" >
-    {{end}}
-    {{template "navbar" .}}
+    <div class="fixe-nav">
+        {{define "ExtraItem"}} 
+            <img src="/static/images/filtre.jpg" alt=""  class="filter-icon" onclick="toggleDiv()" >
+        {{end}}
     
-    {{template "form" .}}  <!--Appel de la page contenant le formulaire-->
-    <div class="title">
-            <h1>ARTISTS</h1>
-        </div> 
-    <div class="container">
+        {{template "navbar" .}}
         
+        {{template "form" .}}  <!--Appel de la page contenant le formulaire-->
+        <div class="title">
+                <h1>ARTISTS</h1>
+        </div> 
+    </div>
+    <div class="container">
         {{range .Artists}}
         <div class="artist-item">
            <a href="/artist-details?Id={{.Aid}}">
