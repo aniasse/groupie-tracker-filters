@@ -13,9 +13,9 @@ import (
 type Filter struct {
 	Artists   []Artist
 	LocatFilt []string
+	NoResult  string
+	Boul      bool
 }
-
-var NewFilter Filter
 
 func HandleFilter(w http.ResponseWriter, r *http.Request) {
 
@@ -23,7 +23,7 @@ func HandleFilter(w http.ResponseWriter, r *http.Request) {
 
 	tabloc := TabLoc(location) //Recuperation et arrangemet des locations
 
-	NewFilter = Filter{
+	NewFilter := Filter{
 		LocatFilt: tabloc,
 	}
 
@@ -227,16 +227,31 @@ func HandleFilterDetail(w http.ResponseWriter, r *http.Request) {
 				}
 			}
 		}
-		NewFilterDetail := Filter{
-			Artists:   Filt,
-			LocatFilt: NewFilter.LocatFilt,
+		location := GetLocationData("https://groupietrackers.herokuapp.com/api/locations")
+
+		tabloc := TabLoc(location) //Recuperation et arrangemet des locations
+
+		temp := template.Must(template.ParseFiles("templates/filter.html", "templates/form.html", "templates/navbar.html"))
+		var err error
+		if len(Filt) == 0 {
+			NewNoresult := Filter{
+				Boul:      true,
+				NoResult:  "NO RESULTS FOR THE INFORMATION ENTERED",
+				LocatFilt: tabloc,
+			}
+			err = temp.Execute(w, NewNoresult)
+			return
+		} else {
+			NewFilterDetail := Filter{
+				Artists:   Filt,
+				LocatFilt: tabloc,
+			}
+			err = temp.Execute(w, NewFilterDetail)
 		}
-		err := template.Must(template.ParseFiles("templates/filter.html", "templates/form.html", "templates/navbar.html")).Execute(w, NewFilterDetail)
 		if err != nil {
 			fmt.Println("Erreur", err)
 		}
 	}
-
 }
 
 func Active(str string) bool {

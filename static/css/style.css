@@ -217,7 +217,9 @@ nav ul li a:hover {
     margin:auto;
     cursor: pointer;
 }
-
+.name-filter{
+    text-align: center;
+}
 /* Media queries pour la réactivité */
 
 @media only screen and  (max-width: 400px) {

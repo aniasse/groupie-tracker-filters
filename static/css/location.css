@@ -316,7 +316,12 @@ nav ul li a:hover {
     color: #e4dcdc;
 }
 
-
+.container .no-result{
+    margin-top: 120px;
+    text-align: center;
+    font-size: xx-large;
+    color: rgb(230, 72, 9);
+}
 
 .date-item{
     background-color: #c6bdbd;
