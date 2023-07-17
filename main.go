@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	//Managing CSS and image files
+
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 	http.Handle("/", pkg.ErrorHandler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {

@@ -282,6 +282,9 @@ nav ul li a:hover {
     .container{
         overflow-y: auto;
     }
+    .body{
+        overflow-y: auto;
+    }
 }
 
 @media only screen and  (max-width: 1000px) {
@@ -369,6 +372,9 @@ nav ul li a:hover {
         position: fixed;
     }
     .container{
+        overflow-y: auto;
+    }
+    .body{
         overflow-y: auto;
     }
 }
