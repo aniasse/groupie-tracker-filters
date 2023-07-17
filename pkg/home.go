@@ -158,7 +158,7 @@ func HandleFilterDetail(w http.ResponseWriter, r *http.Request) {
 					return
 				}
 
-				if ((dat.After(debut_album) && dat.Before(final_album)) || (dat.Equal(debut_album) && dat.Equal(final_album))) && (v.Acread >= dat_debut && v.Acread <= dat_fin) {
+				if (v.Acread >= dat_debut && v.Acread <= dat_fin) && ((dat.After(debut_album) && dat.Before(final_album)) || (dat.Equal(debut_album) || dat.Equal(final_album))) {
 					Filt = append(Filt, v)
 				}
 			}
@@ -177,7 +177,7 @@ func HandleFilterDetail(w http.ResponseWriter, r *http.Request) {
 					fmt.Println("Erreur lors de l'analyse de la date :", err)
 					return
 				}
-				if (v.Acread >= dat_debut && v.Acread <= dat_fin) && (len(v.Amember) >= member1 && len(v.Amember) <= member2) && ((dat.After(debut_album) && dat.Before(final_album)) || (dat.Equal(debut_album) && dat.Equal(final_album))) {
+				if (v.Acread >= dat_debut && v.Acread <= dat_fin) && (len(v.Amember) >= member1 && len(v.Amember) <= member2) && ((dat.After(debut_album) && dat.Before(final_album)) || (dat.Equal(debut_album) || dat.Equal(final_album))) {
 
 					Filt = append(Filt, v)
 				}
@@ -196,7 +196,7 @@ func HandleFilterDetail(w http.ResponseWriter, r *http.Request) {
 						return
 					}
 					for key := range Rel.Relat[i].IRdatloc {
-						if (Art[i].Acread >= dat_debut && Art[i].Acread <= dat_fin) && ((dat.After(debut_album) && dat.Before(final_album)) || (dat.Equal(debut_album) && dat.Equal(final_album))) && key == loca {
+						if (Art[i].Acread >= dat_debut && Art[i].Acread <= dat_fin) && ((dat.After(debut_album) && dat.Before(final_album)) || (dat.Equal(debut_album) || dat.Equal(final_album))) && key == loca {
 							Filt = append(Filt, Art[i])
 
 						}
@@ -222,7 +222,7 @@ func HandleFilterDetail(w http.ResponseWriter, r *http.Request) {
 						return
 					}
 					for key := range Rel.Relat[i].IRdatloc {
-						if (Art[i].Acread >= dat_debut && Art[i].Acread <= dat_fin) && ((dat.After(debut_album) && dat.Before(final_album)) || (dat.Equal(debut_album) && dat.Equal(final_album))) && (len(Art[i].Amember) >= member1 && len(Art[i].Amember) <= member2) && (key == loca) {
+						if (Art[i].Acread >= dat_debut && Art[i].Acread <= dat_fin) && ((dat.After(debut_album) && dat.Before(final_album)) || (dat.Equal(debut_album) || dat.Equal(final_album))) && (len(Art[i].Amember) >= member1 && len(Art[i].Amember) <= member2) && (key == loca) {
 							Filt = append(Filt, Art[i])
 
 						}
