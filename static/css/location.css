@@ -100,11 +100,6 @@ nav ul li a:hover {
   .artist-item h3 {
     margin: 0;
   }
-  
-  .artist-item a:hover {
-    transform: scale(1.1);
-  }
-
 
   .artist-details {
     font-family: Arial, sans-serif;
