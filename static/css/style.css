@@ -160,6 +160,7 @@ nav ul li a:hover {
 }
 .range-input {
     position: relative;
+    cursor: pointer;
 }
 .range-input input {
     position: absolute;
@@ -219,6 +220,9 @@ nav ul li a:hover {
 }
 .name-filter{
     text-align: center;
+}
+.slider1, .slider2{
+    cursor: pointer;
 }
 /* Media queries pour la réactivité */
 
